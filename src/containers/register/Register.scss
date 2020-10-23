@@ -1,0 +1,48 @@
+.registerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.errorToast{
+  width: 50em;
+  border: 0.1em red solid;
+  background-color: #ffa490;
+  border-radius: 1em;
+  margin: 0.2em;
+  padding: 1em;
+  text-align: left;
+}
+
+.warningToast{
+  width: 50em;
+  border: 0.1em #ffa64d solid;
+  background-color: #ffe6cc;
+  border-radius: 1em;
+  margin: 0.2em;
+  padding: 1em;
+  text-align: left;
+}
+
+.registerForm{
+  width: 29em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  label{
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    text-align: center;
+    .checkCovid{
+      align-items: center;
+    }
+  }
+  input{
+    margin: 1em;
+  }
+}
