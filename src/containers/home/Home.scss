@@ -1,3 +1,5 @@
+
+
 .homeContainer{
   display: flex;
   flex-direction: column;
@@ -14,24 +16,65 @@
   height: 100%;
 }
 
+.logo {
+  height: 10em;
+}
+
 .homeContent{
   display: flex;
   flex-direction: row;
+  align-items: center;
   padding: 0.1em;
   height: 100%;
-  background-color: lightcoral;
 }
 
 .homeImg{
+  background-image: none;
   margin:0.5em;
-  background-color: green;
-  height: 70vh;
+  height: 50vh;
   width: 59vw;
+  border-radius: 0.5em;
+}
+
+.clinic{
+  background-image: url("../../images/clinic-inside.jpeg");
+  background-size: cover;
+  background-position: center;
+}
+
+.covid{
+  background-image: url("../../images/masks.jpeg");
+  background-position: top right;
+}
+
+.equipment{
+  background-image: url("../../images/clinic-treatment.jpeg");
+  background-position: right;
+}
+
+.person{
+  background-image: url("../../images/woman-treatment.jpeg");
+  background-size: cover;
+  background-position: center;
 }
 
 .homeText{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5em;
   margin:0.5em;
-  background-color: lightgreen;
-  height: 70vh;
+  background-color: rgba(255,255,255,0.7);
+  height: 40vh;
   width: 39vw;
+
+  .textTitle{
+    padding: 1em;
+  }
+
+  .textDesc{
+    padding: 1em;
+  }
+
 }
