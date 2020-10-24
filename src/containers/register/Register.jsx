@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Register.scss"
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
-
+import logo from "../../images/logo.png";
 const validationErrorMessages = {
   errorPassword: 'Passwords not contain minimum 8 characters, does not contains at least 1 special character, 1 Upercase and at leas 1 number',
   errorEmptyRequired: 'Required inputs came empty',
@@ -81,8 +81,17 @@ function Register() {
 
   return (
     <div className="registerContainer">
+      <div className="innerHeader">
+        <div className="logoContainer">
+          <img src={logo} className="logo" alt="logo"/>
+        </div>
+        <div className="nameContainer">
+          <h1>
+            Registro
+          </h1>
+        </div>
+      </div>
     <div className="registerForm">
-      <h1>Registro</h1>
       <div className={requestError ? 'errorToast' : null}>{requestError}</div>
       <div className={validationEmptyRequired ? 'warningToast' : null}>{validationEmptyRequired}</div>
       <div className={validationEqualPassword ? 'warningToast' : null}>{validationEqualPassword}</div>
@@ -97,7 +106,7 @@ function Register() {
       <label>* Confirmar contraseña: <input onChange={eventHandler} type="password" name="rePassword" required/></label> 
       
       
-     <button onClick={async () => {
+     <button class="turqButton" onClick={async () => {
         try{
           const ok = await validateAndSend(register, validators);
           if(ok){
