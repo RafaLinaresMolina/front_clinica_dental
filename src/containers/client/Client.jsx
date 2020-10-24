@@ -6,10 +6,12 @@ import axios from "axios";
 function Client(props) {
   const [action, setAction] = useState('Citas');
   const [appointments, setAppointments] = useState([]);
-  
-  const getClientCitas = async (props)=>{
+
+  const token = props.user.token;
+  const getClientCitas = async ()=>{
+    console.log('get list of appointments')
     const options = {
-      headers: { Authorization: `Bearer ${props.user.token}` }
+      headers: { Authorization: `Bearer ${token}` }
     }
     try{
       const citas = await axios.get(process.env.REACT_APP_BASE_URL + "/client/appointments", options);
@@ -22,7 +24,7 @@ function Client(props) {
 
   useEffect(() => {
     const options = {
-      headers: { Authorization: `Bearer ${props.user.token}` }
+      headers: { Authorization: `Bearer ${token}` }
     }
     axios.get(process.env.REACT_APP_BASE_URL + "/client/appointments", options)
       .then( (res) => {

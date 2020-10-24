@@ -20,7 +20,6 @@ function Dashboard(props) {
 
   return (
     <div className="homeInfo">
-      {console.log(JSON.stringify(props, null, 2))}
       {cargarVista(props.user.roleId)}
     </div>
   );
