@@ -12,7 +12,6 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-
         {!user ?
           <Route exact path="/" >
             <Home user={user} setUser={setUser} />
