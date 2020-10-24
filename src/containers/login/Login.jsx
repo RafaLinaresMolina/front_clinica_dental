@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./Login.scss";
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
+import logo from "../../images/logo.png";
+
 
 const validationErrorMessages = {
   errorEmptyRequired: 'Required inputs came empty'
@@ -63,14 +65,22 @@ function Login({user,setUser}) {
     
   return (
     <div className="loginContainer">
+      
+      <div className="innerHeader">
+        <div className="logoContainer">
+          <img src={logo} className="logo" alt="logo"/>
+        </div>
+        <div className="nameContainer">
+          <h1>Login</h1>
+        </div>
+      </div>
       <div className="loginForm">
-        <h1>Login</h1>
         <div className={requestError ? 'errorToast' : null}>{requestError}</div>
         <div className={validationEmptyRequired ? 'warningToast' : null}>{validationEmptyRequired}</div>
         <div className={requestOk ? 'correctToast' : null}>{requestOk}</div>
         <label> * Email: <input type="text" name="email" required onChange={eventHandler} placeholder="some@mail.com" /></label>
         <label> * Contraseña: <input type="password" name="password" required onChange={eventHandler} placeholder="password"/> </label>
-        <button onClick={async () => {
+        <button class="turqButton" onClick={async () => {
           try{
             const data = await validateAndSend(login, validators);
             

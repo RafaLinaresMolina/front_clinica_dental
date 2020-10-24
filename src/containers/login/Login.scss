@@ -5,6 +5,15 @@
   flex-direction: column;
 }
 
+.innerHeader{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
 .errorToast {
     display: flex;
     width: 50em;
