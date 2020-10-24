@@ -1,0 +1,56 @@
+.header{
+  display: flex;
+  margin-top: 2em;
+  display: flex;
+  flex-direction: row;
+  margin-left: 4em;
+  height: 14em;
+}
+
+.logoContainer{
+  display: flex;
+  margin-top: 1em;
+  margin-right: 4em;
+  flex-direction: row;
+}
+
+.nameContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.buttons{
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 4em;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.turqButton {
+  all:unset;
+	box-shadow: 0px 10px 14px -7px #276873;
+	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+	background-color:#599bb3;
+	border-radius:0.5em;
+  display:inline-block;
+  margin:0.5em;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:1.2em;
+	font-weight:bold;
+	padding:0.7em;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #3d768a;
+}
+.turqButton:hover {
+	background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+	background-color:#408c99;
+}
+.turqButton:active {
+	position:relative;
+	top:1px;
+}
