@@ -65,7 +65,6 @@ function Login({user,setUser}) {
     
   return (
     <div className="loginContainer">
-      
       <div className="innerHeader">
         <div className="logoContainer">
           <img src={logo} className="logo" alt="logo"/>
@@ -80,7 +79,7 @@ function Login({user,setUser}) {
         <div className={requestOk ? 'correctToast' : null}>{requestOk}</div>
         <label> * Email: <input type="text" name="email" required onChange={eventHandler} placeholder="some@mail.com" /></label>
         <label> * Contraseña: <input type="password" name="password" required onChange={eventHandler} placeholder="password"/> </label>
-        <button class="turqButton" onClick={async () => {
+        <button className="turqButton" onClick={async () => {
           try{
             const data = await validateAndSend(login, validators);
             

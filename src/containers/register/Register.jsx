@@ -106,7 +106,7 @@ function Register() {
       <label>* Confirmar contraseña: <input onChange={eventHandler} type="password" name="rePassword" required/></label> 
       
       
-     <button class="turqButton" onClick={async () => {
+     <button className="turqButton" onClick={async () => {
         try{
           const ok = await validateAndSend(register, validators);
           if(ok){
