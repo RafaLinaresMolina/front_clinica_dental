@@ -1,0 +1,105 @@
+.content {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  background-color: lightcyan;
+  height: 100%;
+  width: 85vw;
+  margin-left: 15vw;
+  overflow-y: auto;
+}
+
+.actionName {
+  display: flex;
+  flex-direction: column;
+}
+
+.tableAppointment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hideButton{
+  display: none;
+}
+
+.cancelButton{
+  all:unset;
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 2em;
+  height: 2em;
+  user-select: none;
+  background-color: whitesmoke;
+}
+
+.cancelButton:hover{
+  background-color: red;
+  cursor: pointer;
+}
+
+.cancelButton:active{
+  background-color: orange;
+  cursor: pointer;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+
+  thead {
+    th {
+      text-align: center;
+      border: 1px solid #000;
+      background-color: white;
+      padding: 8px;
+    }
+  }
+
+  tbody {
+    td {
+      border: 1px solid #000;
+      text-align: left;
+      padding: 8px;
+      :nth-child(even) {
+        background-color: #dddddd;
+      }
+    }
+    .trCancell {
+      td {
+        background-color: grey;
+      }
+    }
+
+    .trPending {
+      td {
+        background-color: orange;
+      }
+    }
+
+    .trAccepted {
+      td {
+        background-color: lightgreen;
+      }
+    }
+
+    .trPastDue {
+      td {
+        background-color: red;
+      }
+    }
+
+    .trDone {
+      td {
+        background-color: lightseagreen;
+      }
+    }
+    
+  }
+}
