@@ -5,7 +5,6 @@ import Dentist from "../dentist/Dentist";
 
 function Dashboard(props) {
   const cargarVista = (roleId) => {
-    console.log(roleId);
     const layouts = {
       0: <Admin user={props.user} setUser={props.setUser} />,
       1: <Client user={props.user} setUser={props.setUser} />,
