@@ -1,9 +1,11 @@
+
 import React from "react";
 import ClientAppointmentForm from "./ClientAppointmentForm";
 import ClientAppointmentList from "./ClientAppointmentList";
 import "./ClientContent.scss";
 
 function ClientContent(props) {
+
   return (
     <div className="content">
       <div className="actionName">
@@ -14,8 +16,15 @@ function ClientContent(props) {
           user={props.user}
           getClientCitas={props.getClientCitas}
           appointments={props.appointments}
+          setAppointments={props.setAppointments}
           /> : 
-          <ClientAppointmentForm/>
+          <ClientAppointmentForm
+          user={props.user}
+          getClientCitas={props.getClientCitas}
+          action={props.action}
+          setAction={props.setAction}
+          
+          />
         }
         
       </div>

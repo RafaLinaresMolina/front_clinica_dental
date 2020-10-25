@@ -22,7 +22,7 @@ function ClientNavBar(props) {
     <div className="navBar">
       <div className="greetings">
         <div className="greetingsText">Bienvenido</div>
-        <div className="greetingsText">{props.user.name}</div>
+        <div className="greetingsText">{props.user.name} {props.user.lastName}</div>
       </div>
       <div className="actions">
         <div className="turqButton" onClick={async() => {

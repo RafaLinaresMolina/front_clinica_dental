@@ -9,7 +9,6 @@ function Client(props) {
 
   const token = props.user.token;
   const getClientCitas = async ()=>{
-    console.log('get list of appointments')
     const options = {
       headers: { Authorization: `Bearer ${token}` }
     }
@@ -22,20 +21,6 @@ function Client(props) {
     }
   }
 
-  useEffect(() => {
-    const options = {
-      headers: { Authorization: `Bearer ${token}` }
-    }
-    axios.get(process.env.REACT_APP_BASE_URL + "/client/appointments", options)
-      .then( (res) => {
-          console.log(res.data);
-          setAppointments(res.data);
-    
-      }).catch( (err) => {
-        console.log( err );
-      });
-  },[]);
-  //
   
   return (
     
