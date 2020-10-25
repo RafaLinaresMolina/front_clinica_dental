@@ -123,12 +123,12 @@ function ClientAppointmentForm(props) {
         </MuiPickersUtilsProvider></label>
      <button className="turqButton" onClick={async () => {
         try{
-          await validateAndSend(appointment, validators);
-            
+          const response = await validateAndSend(appointment, validators);
+            if(response){
               setTimeout(() => {
                 props.setAction('Citas');
               }, 1000);
-            
+            }            
         }catch(err){
           console.log(err.message)
         }
