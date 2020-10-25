@@ -4,7 +4,7 @@ import ClientNavBar from "./components/ClientNavBar";
 import './Client.scss';
 import axios from "axios";
 function Client(props) {
-  const [action, setAction] = useState('Citas');
+  const [action, setAction] = useState('citas');
   const [appointments, setAppointments] = useState([]);
 
   const token = props.user.token;

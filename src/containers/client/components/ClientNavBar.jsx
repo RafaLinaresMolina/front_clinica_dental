@@ -26,13 +26,16 @@ function ClientNavBar(props) {
       </div>
       <div className="actions">
         <div className="turqButton" onClick={async() => {
-          props.setAction('Citas');
+          props.setAction('citas');
           await props.getClientCitas(props);
           }}>
           Ver citas
         </div>
-        <div className="turqButton" onClick={() => props.setAction('Formulario de nueva cita')}>
+        <div className="turqButton" onClick={() => props.setAction('create')}>
           Crear cita
+        </div>
+        <div className="turqButton" onClick={() => props.setAction('profile')}>
+          Ver perfil
         </div>
         <div className="turqButton" onClick={async() => {
             try {
