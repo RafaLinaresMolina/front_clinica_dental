@@ -15,7 +15,7 @@ const doLogin = async (login) => {
     const token = resLogin.data.token;
     const headers = { headers: { Authorization: `Bearer ${token}` }};
     const resUser = await axios.get(process.env.REACT_APP_BASE_URL + '/auth/user',headers);
-    console.log(resUser)
+
     const user = {
       name: resUser.data.name,
       lastName: resUser.data.lastName,
@@ -84,7 +84,7 @@ function Login({user,setUser}) {
         <button className="turqButton" onClick={async () => {
           try{
             const data = await validateAndSend(login, validators);
-            console.log(data)
+     
             setRequestOk(`Login correcto, bienvenido ${data.name}`)
             if(data){
               setTimeout(() => {
