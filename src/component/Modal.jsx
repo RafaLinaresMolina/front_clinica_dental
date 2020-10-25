@@ -19,12 +19,11 @@ function Modal(props)  {
       const options = {
         headers: { Authorization: `Bearer ${props.user.token}` }
       }
-      const response = await axios.delete(process.env.REACT_APP_BASE_URL + '/client/appointment/' + id, options);
-      console.log(response.data);
+      await axios.delete(process.env.REACT_APP_BASE_URL + '/client/appointment/' + id, options);
       props.getClientCitas();
       props.handleClose();
     } catch (error) {
-      console.log(error.response)
+      throw error.response;
     }
   }
 
@@ -33,7 +32,7 @@ function Modal(props)  {
         <section className="modal-main">
           <div className={classes}>
             <div className="redButton modal-exit" onClick={props.handleClose}>&nbsp;X&nbsp;</div>
-            <div className='modal-title'>Titulo del modal</div>
+            <div className='modal-title'>{props.title}</div>
           </div>
           <div className="modal-body">
             <div className="modal-text">
