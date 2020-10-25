@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ClientContent from "./components/ClientContent";
 import ClientNavBar from "./components/ClientNavBar";
 import './Client.scss';
