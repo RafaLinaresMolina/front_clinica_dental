@@ -11,7 +11,7 @@ function AllLoggedUsers(props) {
     }
     axios.get(process.env.REACT_APP_BASE_URL + "/admin/users/logged", options)
       .then( (res) => {
-          props.setUsersLogged(res.data);
+          props.setUsersLogged(res.data.reverse());
     
       }).catch( (err) => {
         console.log( err );
