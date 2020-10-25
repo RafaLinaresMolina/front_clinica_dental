@@ -6,7 +6,6 @@ import axios from "axios";
 function Client(props) {
   const [action, setAction] = useState('citas');
   const [appointments, setAppointments] = useState([]);
-
   const token = props.user.token;
   const getClientCitas = async ()=>{
     const options = {
@@ -21,9 +20,7 @@ function Client(props) {
     }
   }
 
-  
-  return (
-    
+  return (    
     <div className="wholeContainer">
       <ClientNavBar action={action} setAction={setAction} user={props.user} setUser={props.setUser} getClientCitas={getClientCitas} appointments={appointments} setAppointments={setAppointments}/>
       <ClientContent action={action} setAction={setAction} user={props.user} setUser={props.setUser} getClientCitas={getClientCitas} appointments={appointments} setAppointments={setAppointments}/>

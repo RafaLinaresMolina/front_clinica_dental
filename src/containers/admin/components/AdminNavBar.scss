@@ -1,0 +1,30 @@
+.navBar{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  background-color: grey;
+  height: 100%;
+  width: 15vw;
+  z-index: 0;
+}
+
+.greetings{
+  height: 15em;
+  background-color: darkgray;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  .greetingsText{
+    font-size: 2em;
+    font-weight: bold;
+  } 
+}
+
+.actions{
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  font-size: 1em;
+  font-weight: bold;
+}
