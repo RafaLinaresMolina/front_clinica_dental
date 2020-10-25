@@ -39,7 +39,7 @@ const validateAndSend = async (register, validators) => {
       return await doRegister(register);
     }
   }catch(err){
-    validators.setRequestError(err.response.data.trace)
+    validators.setRequestError(JSON.stringify(err.response.data))
     throw err;
   }
 }
