@@ -30,7 +30,7 @@ function AllAppointmentList(props) {
     }
     axios.get(process.env.REACT_APP_BASE_URL + "/admin/appointments", options)
       .then( (res) => {
-          props.setAppointments(res.data.reverse());
+          props.setAppointments(res.data);
     
       }).catch( (err) => {
         console.log( err );

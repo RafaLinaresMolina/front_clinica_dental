@@ -14,7 +14,7 @@ function Admin(props) {
      }
      try{
        const citas = await axios.get(process.env.REACT_APP_BASE_URL + "/admin/appointments", options);
-       setAppointments(citas.data.reverse())
+       setAppointments(citas.data)
        return citas.data;
      }catch(err){
        throw err

@@ -13,7 +13,7 @@ function Client(props) {
     }
     try{
       const citas = await axios.get(process.env.REACT_APP_BASE_URL + "/client/appointments", options);
-      setAppointments(citas.data.reverse())
+      setAppointments(citas.data)
       return citas.data;
     }catch(err){
       throw err

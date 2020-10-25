@@ -47,7 +47,7 @@ function ClientAppointmentList(props) {
     }
     axios.get(process.env.REACT_APP_BASE_URL + "/client/appointments", options)
       .then( (res) => {
-          props.setAppointments(res.data.reverse());
+          props.setAppointments(res.data);
     
       }).catch( (err) => {
         console.log( err );
