@@ -24,7 +24,8 @@ function AdminContent(props) {
     const actions = {
       'citas': 'Ver citas',
       'create': 'Crear nueva cita',
-      'profile': 'Perfil de usuario'
+      'profile': 'Perfil de usuario',
+      'logged': 'Usuarios activos'
     }
     return actions[action] ? actions[action] : actions['citas'];
   }

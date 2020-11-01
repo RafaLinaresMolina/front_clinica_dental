@@ -63,6 +63,12 @@ table {
   width: 90%;
 
   thead {
+    tr{
+      user-select: none;
+      :hover{
+        background-color: #8ad4db;
+      }
+    }
     
     border-radius: 1em;
     th {
@@ -109,6 +115,12 @@ table {
     .trDone {
       td {
         background-color: #b8f8ff;
+      }
+    }
+
+    .trDefault{
+      td {
+        background-color: #daf5f4;
       }
     }
     
