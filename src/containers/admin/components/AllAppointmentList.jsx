@@ -56,7 +56,7 @@ function AllAppointmentList(props) {
         },
         {
           Header: "Creación de la cita",
-          accessor: "createdAt",
+          accessor: "creationDate",
           Cell: ({ value }) => {
             return value ? (
               <span style={{ whiteSpace: "nowrap" }}>
