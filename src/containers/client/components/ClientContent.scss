@@ -21,6 +21,12 @@
   justify-content: center;
 }
 
+.actionButtons{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .hideButton{
   display: none;
 }
@@ -49,57 +55,64 @@
 }
 
 table {
+  border-collapse: collapse;
+  border-radius: 1em;
+  overflow: hidden;
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 90%;
 
   thead {
+    
+    border-radius: 1em;
     th {
+      border-bottom: 2px solid black; 
       text-align: center;
-      border: 1px solid #000;
-      background-color: white;
-      padding: 8px;
+      background-color: #349fa8;
+      padding: 1em;
     }
   }
 
   tbody {
-    td {
-      border: 1px solid #000;
+    td { 
+      border-bottom: 2px solid white; 
       text-align: left;
-      padding: 8px;
+      padding: 1em;
       :nth-child(even) {
         background-color: #dddddd;
       }
     }
     .trCancell {
       td {
-        background-color: grey;
+        background-color: #cccccc;
       }
     }
 
     .trPending {
       td {
-        background-color: orange;
+        background-color: #ffe0a1;
       }
     }
 
     .trAccepted {
       td {
-        background-color: lightgreen;
+        background-color: #ccffe0;
       }
     }
 
     .trPastDue {
       td {
-        background-color: red;
+        background-color: #ff8585;
       }
     }
 
     .trDone {
       td {
-        background-color: lightseagreen;
+        background-color: #b8f8ff;
       }
     }
     
   }
 }
+
+

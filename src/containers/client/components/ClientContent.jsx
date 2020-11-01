@@ -1,5 +1,6 @@
 
 import React from "react";
+import { connect } from "react-redux";
 import Profile from "../../profile/Profile";
 import ClientAppointmentForm from "./ClientAppointmentForm";
 import ClientAppointmentList from "./ClientAppointmentList";
@@ -7,22 +8,12 @@ import "./ClientContent.scss";
 
 function ClientContent(props) {
 
-
   const loadComponentByAction = (action) => {
+
     const actions = {
-      'citas': <ClientAppointmentList
-      user={props.user}
-      getClientCitas={props.getClientCitas}
-      appointments={props.appointments}
-      setAppointments={props.setAppointments}
-      />,
-      'create': <ClientAppointmentForm
-      user={props.user}
-      getClientCitas={props.getClientCitas}
-      action={props.action}
-      setAction={props.setAction}
-      />,
-      'profile': <Profile user={props.user}/>
+      'citas': <ClientAppointmentList/>,
+      'create': <ClientAppointmentForm action={props.action} setAction={props.setAction} />,
+      'profile': <Profile/>
     }
     return actions[action] ? actions[action] : actions['citas'];
   }
@@ -45,4 +36,8 @@ function ClientContent(props) {
     </div>
   );
 }
-export default ClientContent;
+
+const mapStateToProps = (state) => {
+  return { user: state.user };
+};
+export default connect(mapStateToProps) (ClientContent);
