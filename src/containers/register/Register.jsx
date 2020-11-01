@@ -1,50 +1,77 @@
 import React, { useState } from "react";
 import "./Register.scss"
 import axios from 'axios';
+import { connect } from "react-redux";
+import { ERROR_NOTIFICATION, SUCCSESS_NOTIFICATION, WARNING_NOTIFICATION } from "../../redux/types";
 const validationErrorMessages = {
   errorPassword: 'Passwords not contain minimum 8 characters, does not contains at least 1 special character, 1 Upercase and at leas 1 number',
   errorEmptyRequired: 'Required inputs came empty',
   errorEqualPassword: 'Passwords did not match',
 }
 
-const validateAndSend = async (register, validators) => {
+const validateAndSend = async (register, props) => {
   try{
-    validators.setValidationEmptyRequired();
-    validators.setValidationEqualPassword();
-    validators.setValidationPassword();
-    validators.setValidationEmptyRequired();
+
+    let notificationMessage = [];
+
     let allOk = true;
     const passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
     if(register.name === "" || register.lastName === "" || register.password === "" || register.email === ""){
-      validators.setValidationEmptyRequired(validationErrorMessages.errorEmptyRequired);
+      
+      notificationMessage.push(validationErrorMessages.errorEmptyRequired);
       allOk = false;
-    }else {
-      validators.setValidationEmptyRequired();
     }
     if((register.password !== register.rePassword)){
-      validators.setValidationEqualPassword(validationErrorMessages.errorEqualPassword);
+      notificationMessage.push(validationErrorMessages.errorEqualPassword);
       allOk = false;
-    }else{
-      validators.setValidationEqualPassword();
     }
     if(!passRegex.test(register.password)){
-      validators.setValidationPassword(validationErrorMessages.errorPassword);
+      notificationMessage.push(validationErrorMessages.errorPassword)
       allOk = false;
-    }else{
-      validators.setValidationPassword();
     }
     if(allOk){
-      return await doRegister(register);
+      return await doRegister(register, props);
+    } else {
+      props.dispatch({
+        type: WARNING_NOTIFICATION,
+        payload: {
+          notification: {
+            title: "Advertencia",
+            msg: notificationMessage,
+          },
+          show: true,
+        },
+      });
     }
   }catch(err){
-    validators.setRequestError(JSON.stringify(err.response.data))
+    props.dispatch({
+      type: ERROR_NOTIFICATION,
+      payload: {
+        notification: {
+          title: "Error",
+          msg: err.response.data.trace,
+        },
+        show: true,
+      },
+    });
     throw err;
   }
 }
 
-const doRegister = async (register) => {
+const doRegister = async (register, props) => {
   try{
-    return await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/register`,register);
+    const resLogin = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/register`,register);
+    props.dispatch({
+      type: SUCCSESS_NOTIFICATION,
+      payload: {
+        notification: {
+          title: "Registro correcto",
+          msg: `Gracias por hacerte una cuenta con nosotros ${register.name}`,
+        },
+        show: true,
+      },
+    });
+    return resLogin.data;
   }catch(err){
     throw err;
   }
@@ -61,19 +88,8 @@ function Register(props) {
     rePassword: ""
   });
 
-  const [validationPassword, setValidationPassword] = useState();
-  const [validationEmptyRequired, setValidationEmptyRequired] = useState();
-  const [validationEqualPassword, setValidationEqualPassword] = useState();
-  const [requestError, setRequestError] = useState();
-
-  const validators = {setValidationPassword, setValidationEmptyRequired, setValidationEqualPassword, setRequestError};
-
   const eventHandler = (ev) => {
     setRegister({ ...register, [ev.target.name]: ev.target.type !== "checkbox" ? ev.target.value : ev.target.checked});
-    validators.setValidationEmptyRequired();
-    validators.setValidationEqualPassword();
-    validators.setValidationPassword();
-    validators.setValidationEmptyRequired();
   };
 
   return (
@@ -91,7 +107,7 @@ function Register(props) {
       
      <button className="turqButton" onClick={async () => {
         try{
-          const ok = await validateAndSend(register, validators);
+          const ok = await validateAndSend(register, props);
           if(ok){
             setTimeout(() => {
               props.handleClose();
@@ -101,13 +117,18 @@ function Register(props) {
           console.log(err.message)
         }
        }}> Register </button>
-      <div className={requestError ? 'errorToast' : null}>{requestError}</div>
-      <div className={validationEmptyRequired ? 'warningToast' : null}>{validationEmptyRequired}</div>
-      <div className={validationEqualPassword ? 'warningToast' : null}>{validationEqualPassword}</div>
-      <div className={validationPassword ? 'warningToast' : null}>{validationPassword}</div>
     </div>
 
   );
 }
 
-export default Register;
+const mapStateToProps = (state) => {
+  return {
+    errorNotification: state.errorNotification,
+    warningNotification: state.warningNotification,
+    successNotification: state.successNotification,
+    infoNotification: state.infoNotification,
+  };
+};
+
+export default connect(mapStateToProps)(Register);
