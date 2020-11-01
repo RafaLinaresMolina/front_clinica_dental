@@ -46,7 +46,9 @@ const NotificationMessage = (props) => {
       </div>
       <div className="notification-message">
         <span className="notification-title">{props.notification.title}</span>
-        <span>{props.notification.msg}</span>
+        { typeof(props.notification.msg) === 'string' ? <span>{props.notification.msg}</span>
+         : <ul> {props.notification.msg?.map((message, i) => <li key={`${props.type}_${i}_notification`}> {message}</li>)}</ul>}
+        
         {clearNotification(props)}
       </div>
     </div>

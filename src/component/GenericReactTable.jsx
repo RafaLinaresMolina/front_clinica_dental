@@ -57,7 +57,7 @@ function GenericReactTable(props) {
             prepareRow(row);
             return (
               
-              <tr {...row.getRowProps()} className={getStyle(row.original.status, row.original.date)}>
+              <tr {...row.getRowProps()} className={!props.defaultStyle ? getStyle(row.original.status, row.original.date) : "trDefault"}>
                 {row.cells.map((cell) => {
                   return (
                     <td

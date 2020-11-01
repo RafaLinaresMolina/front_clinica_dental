@@ -40,7 +40,4 @@ function AdminContent(props) {
   );
 }
 
-
-
-
 export default AdminContent;
