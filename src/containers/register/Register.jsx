@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "./Register.scss"
 import axios from 'axios';
-import { useHistory } from "react-router-dom";
-import logo from "../../images/logo.png";
 const validationErrorMessages = {
   errorPassword: 'Passwords not contain minimum 8 characters, does not contains at least 1 special character, 1 Upercase and at leas 1 number',
   errorEmptyRequired: 'Required inputs came empty',
@@ -52,8 +50,7 @@ const doRegister = async (register) => {
   }
 }
 
-function Register() {
-  const history = useHistory();
+function Register(props) {
   const [register, setRegister] = useState({
     name: "",
     lastName: "",
@@ -80,22 +77,8 @@ function Register() {
   };
 
   return (
-    <div className="registerContainer">
-      <div className="innerHeader">
-        <div className="logoContainer">
-          <img src={logo} className="logo" alt="logo"/>
-        </div>
-        <div className="nameContainer">
-          <h1>
-            Registro
-          </h1>
-        </div>
-      </div>
+
     <div className="registerForm">
-      <div className={requestError ? 'errorToast' : null}>{requestError}</div>
-      <div className={validationEmptyRequired ? 'warningToast' : null}>{validationEmptyRequired}</div>
-      <div className={validationEqualPassword ? 'warningToast' : null}>{validationEqualPassword}</div>
-      <div className={validationPassword ? 'warningToast' : null}>{validationPassword}</div>
    
       <label>* Nombre: <input type="text" name="name" required onChange={eventHandler}/></label> 
       <label>* Apellidos: <input type="text" name="lastName" required onChange={eventHandler}/></label> 
@@ -111,16 +94,19 @@ function Register() {
           const ok = await validateAndSend(register, validators);
           if(ok){
             setTimeout(() => {
-              history.push('/login')
+              props.handleClose();
             }, 1000);
           }
         }catch(err){
           console.log(err.message)
         }
        }}> Register </button>
+      <div className={requestError ? 'errorToast' : null}>{requestError}</div>
+      <div className={validationEmptyRequired ? 'warningToast' : null}>{validationEmptyRequired}</div>
+      <div className={validationEqualPassword ? 'warningToast' : null}>{validationEqualPassword}</div>
+      <div className={validationPassword ? 'warningToast' : null}>{validationPassword}</div>
     </div>
-    
-  </div>
+
   );
 }
 

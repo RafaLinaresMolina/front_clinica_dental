@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;;
   flex-direction: column;
 }
 
@@ -12,41 +13,6 @@
   flex-direction: row;
   margin-top: 1em;
   margin-bottom: 1em;
-}
-
-.errorToast {
-    display: flex;
-    width: 50em;
-    border: 0.1em red solid;
-    color: red;
-    background-color: #ffbeaf;
-    border-radius: 1em;
-    margin: 0.2em;
-    padding: 1em;
-    text-align: left;
-  }
-
-
-.warningToast {
-  width: 50em;
-  border: 0.1em #ffa64d solid;
-  color: #ff9705;
-  background-color: #ffe6cc;
-  border-radius: 1em;
-  margin: 0.2em;
-  padding: 1em;
-  text-align: left;
-}
-
-.correctToast {
-  width: 50em;
-  border: 0.1em green solid;
-  color: green;
-  background-color: #b0ffb1;
-  border-radius: 1em;
-  margin: 0.2em;
-  padding: 1em;
-  text-align: left;
 }
 
 .loginForm {
