@@ -97,7 +97,7 @@ function ClientAppointmentForm(props) {
     { label: 'Endodoncia' , target: {name: 'title', type: 'select', value: 'Endodoncia'} },
     { label: 'Empaste' , target: {name: 'title', type: 'select', value: 'Empaste'} },
     { label: 'Extracción de muelas del jucio', target: {name: 'title', type: 'select', value: 'Extracción de muelas del jucio'}  },
-    { label: 'ortodoncia' , target: {name: 'title', type: 'select', value: 'ortodoncia'} },
+    { label: 'Ortodoncia' , target: {name: 'title', type: 'select', value: 'ortodoncia'} },
   ]
 
   const colourStyles = {
@@ -119,7 +119,7 @@ function ClientAppointmentForm(props) {
       <label> Observaciones: <textarea type="text" name="observations" required onChange={eventHandler}/></label> 
       <label>* Fecha:
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <DateTimePicker hintText="Weekends Disabled" shouldDisableDate={disableWeekends} name="date" minDate={initialDate} value={appointment.date} onChange={eventHandler} />
+          <DateTimePicker hinttext="Weekends Disabled" shouldDisableDate={disableWeekends} name="date" minDate={initialDate} value={appointment.date} onChange={eventHandler} />
         </MuiPickersUtilsProvider></label>
      <button className="turqButton" onClick={async () => {
         try{
