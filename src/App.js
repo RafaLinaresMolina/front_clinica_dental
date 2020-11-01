@@ -1,30 +1,51 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import "./App.css";
+import CustomNotification from "./component/CustomNotification";
+import Dashboard from "./containers/dashboard/Dashboard";
+import Home from "./containers/home/Home";
+import { READ_USER } from "./redux/types";
 
-import './App.css';
-import Dashboard from './containers/dashboard/Dashboard';
-import Home from './containers/home/Home';
-
-function App() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+const App = (props) => {
+  useEffect(() => {
+    try {
+      if (!props.user.email) {
+        const localUser = JSON.parse(localStorage.getItem("user"));
+        props.dispatch({ type: READ_USER, payload: localUser });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
 
   return (
     <div className="App">
+      <CustomNotification/>
       <BrowserRouter>
         <Switch>
-        {!user ?
-          <Route exact path="/" >
-            <Home user={user} setUser={setUser} />
-          </Route>
-          :
-          <Route exact path="/dashboard" >
-            <Dashboard user={user} setUser={setUser} />
-          </Route>}
-         {user ?  <Redirect to="/dashboard" /> :  <Redirect to="/" />}
+          {!props.user?.email ? (
+            <Route exact path="/">
+              <Home />
+            </Route>
+          ) : (
+            <Route exact path="/dashboard">
+              <Dashboard />
+            </Route>
+          )}
+          {props.user?.email ? (
+            <Redirect to="/dashboard" />
+          ) : (
+            <Redirect to="/" />
+          )}
         </Switch>
-        </BrowserRouter>
+      </BrowserRouter>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return { user: state.user };
+};
+
+export default connect(mapStateToProps)(App);

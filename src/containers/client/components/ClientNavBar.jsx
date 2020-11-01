@@ -2,6 +2,8 @@ import React from "react";
 import "./ClientNavBar.scss";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+import { LOGOUT, UPDATE_APPOINTMENTS } from "../../../redux/types";
 
 const logOut = async(props) => {
   const config = {
@@ -9,11 +11,23 @@ const logOut = async(props) => {
   };
   try{
     await axios.get(process.env.REACT_APP_BASE_URL + '/auth/logout', config);
-    props.setUser();
     localStorage.removeItem('user');
+    props.dispatch({type:LOGOUT, payload: {}})
     
   }catch(err){
     console.log(err)
+  }
+}
+
+const getClientCitas = async (props)=>{
+  const options = {
+    headers: { Authorization: `Bearer ${props.user.token}` }
+  }
+  try{
+    const citas = await axios.get(process.env.REACT_APP_BASE_URL + "/client/appointments", options);
+    return citas.data;
+  }catch(err){
+    throw err
   }
 }
 function ClientNavBar(props) {
@@ -27,7 +41,8 @@ function ClientNavBar(props) {
       <div className="actions">
         <div className="turqButton" onClick={async() => {
           props.setAction('citas');
-          await props.getClientCitas(props);
+          const res = await getClientCitas(props);
+          props.dispatch({type: UPDATE_APPOINTMENTS, payload: res})
           }}>
           Ver citas
         </div>
@@ -52,4 +67,8 @@ function ClientNavBar(props) {
   );
 }
 
-export default ClientNavBar;
+const mapStateToProps = state => {
+  return {user: state.user}
+}
+
+export default connect(mapStateToProps) (ClientNavBar);

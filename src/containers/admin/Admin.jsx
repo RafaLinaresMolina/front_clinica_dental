@@ -3,6 +3,7 @@ import AdminContent from "./components/AdminContent";
 import AdminNavBar from "./components/AdminNavBar";
 import './Admin.scss';
 import axios from "axios";
+import { connect } from "react-redux";
 function Admin(props) {
   const [action, setAction] = useState('citas');
   const [appointments, setAppointments] = useState([]);
@@ -28,5 +29,8 @@ function Admin(props) {
     </div>
   );
 }
+const mapStateToProps = state => {
+  return {user: state.user}
+}
 
-export default Admin;
+export default connect(mapStateToProps) (Admin);

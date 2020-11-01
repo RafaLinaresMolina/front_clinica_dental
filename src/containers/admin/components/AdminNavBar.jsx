@@ -2,6 +2,8 @@ import React from "react";
 import "./AdminNavBar.scss";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import {LOGOUT} from '../../../redux/types';
+import { connect } from "react-redux";
 
 const logOut = async(props) => {
   const config = {
@@ -9,8 +11,8 @@ const logOut = async(props) => {
   };
   try{
     await axios.get(process.env.REACT_APP_BASE_URL + '/auth/logout', config);
-    props.setUser();
     localStorage.removeItem('user');
+    props.dispatch({type:LOGOUT, payload: {}})
     
   }catch(err){
     console.log(err)
@@ -50,5 +52,8 @@ function AdminNavBar(props) {
     </div>
   );
 }
+const mapStateToProps = state => {
+  return {user: state.user}
+}
 
-export default AdminNavBar;
+export default connect(mapStateToProps) (AdminNavBar);
