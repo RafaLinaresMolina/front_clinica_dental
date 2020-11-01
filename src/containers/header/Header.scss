@@ -30,7 +30,8 @@
   flex-direction: row;
 }
 .turqButton {
-  all:unset;
+	all:unset;
+	user-select: none;
 	box-shadow: 0px 10px 14px -7px #276873;
 	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
 	background-color:#599bb3;
@@ -57,7 +58,8 @@
 }
 
 .redButton {
-  all:unset;
+	all:unset;
+	user-select: none;
 	box-shadow: 0px 10px 14px -7px #762d1c;
 	background:linear-gradient(to bottom, #ee6a4a 5%, #ee3b11 100%);
 	background-color:#ea7a60;
@@ -79,6 +81,34 @@
 	background-color:#ea6749;
 }
 .redButton:active {
+	position:relative;
+	top:1px;
+}
+
+.greenButton {
+	all:unset;
+	user-select: none;
+	box-shadow: 0px 10px 14px -7px #276873;
+	background:linear-gradient(to bottom, #88ff7d 5%, #51ed42 100%);
+	background-color:#88ff7d;
+	border-radius:0.5em;
+  display:inline-block;
+  margin:0.5em;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:1.2em;
+	font-weight:bold;
+	padding:0.7em;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #71f564;
+}
+
+.greenButton:hover {
+	background:linear-gradient(to bottom, #71f564 5%, #98f28f 100%);
+	background-color:#98f28f;
+}
+.greenButton:active {
 	position:relative;
 	top:1px;
 }

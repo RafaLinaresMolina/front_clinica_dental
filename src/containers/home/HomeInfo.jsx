@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import './Home.scss'
 
 
@@ -74,4 +75,4 @@ function HomeInfo() {
   );
 }
 
-export default HomeInfo;
+export default connect() (HomeInfo);
