@@ -17,9 +17,10 @@ function ClientAppointmentList(props) {
       3: "Finalizada",
     };
 
-    const isPastDue = ([1, 2].includes(+status) && date < new Date());
-    console.log("translateStatus", isPastDue, date)
-    return isPastDue ? <span>
+    const isCancellable = [1, 2].includes(+status);
+    const isPastDue = (date < new Date());
+    console.log("translateStatus", isCancellable, isPastDue, date)
+    return isCancellable && !isPastDue ? <span>
           <del>{values[status]}</del>{" "}
           <b style={{ whiteSpace: "nowrap", backgroundColor: "unset" }}>
             Fecha vencida
