@@ -124,6 +124,7 @@ function ClientAppointmentList(props) {
         {
           Header: "Estado",
           accessor: (row, i) => {
+            console.log('HEADER STATUS: ', row.date)
             return translateStatus(row.status, row.date);
           },
         },
