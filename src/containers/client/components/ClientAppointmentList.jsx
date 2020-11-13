@@ -179,10 +179,10 @@ function ClientAppointmentList(props) {
         {
           Header: "Cancelar",
           accessor: (row, i) => {
-            const isCancelable = ![0, 3].includes(row.status);
+            const isNotCancelable = ![0, 3].includes(+row.status);
             const isPastDate = isPastDue(new Date(row.date));
-            console.log("Cancel Header", isCancelable, isPastDate, row.date, new Date(row.date), new Date())
-            return isCancelable && !isPastDate ? (
+            console.log("Cancel Header", isNotCancelable, isPastDate, row.date, new Date(row.date), new Date())
+            return isNotCancelable && !isPastDate ? (
               <div className="actionButtons">
                 <div
                   className={"redButton"}
