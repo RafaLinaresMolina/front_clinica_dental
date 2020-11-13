@@ -16,17 +16,15 @@ function ClientAppointmentList(props) {
       2: "Aceptada",
       3: "Finalizada",
     };
-    if ([1, 2].includes(status) && new Date(date) < new Date()) {
-      return (
-        <span>
+
+    const isPastDue = ([1, 2].includes(+status) && new Date(date) < new Date());
+    console.log("translateStatus", isPastDue)
+    return isPastDue ? <span>
           <del>{values[status]}</del>{" "}
           <b style={{ whiteSpace: "nowrap", backgroundColor: "unset" }}>
             Fecha vencida
           </b>
-        </span>
-      );
-    }
-    return values[status];
+        </span> : values[status];
   };
   
   const getClientCitas = async (props)=>{
@@ -179,8 +177,10 @@ function ClientAppointmentList(props) {
         {
           Header: "Cancelar",
           accessor: (row, i) => {
-            return ![0, 3].includes(row.status) && ([1, 2].includes(row.status) && new Date(row.date) > new Date()) ? (
-
+            const isCancelable = ![0, 3].includes(row.status);
+            const isPastDue = ([1, 2].includes(row.status) && new Date(row.date) < new Date())
+            console.log("Cancel Header", isCancelable, isPastDue)
+            return isCancelable && !isPastDue ? (
               <div className="actionButtons">
                 <div
                   className={"redButton"}
