@@ -11,7 +11,9 @@ const getStyle = (status, date) => {
     4: "trDefault"
   };  
 
-  if(([1,2].includes(status)) && (new Date(date) < new Date())){
+  const isCancellable = ([1,2].includes(status));
+  const isPastDue = (date > new Date())
+  if(isCancellable && !isPastDue){
     return "trPastDue"
   }
   return values[status] ? values[status] : 'trDefault';
@@ -57,7 +59,7 @@ function GenericReactTable(props) {
             prepareRow(row);
             return (
               
-              <tr {...row.getRowProps()} className={!props.defaultStyle ? getStyle(row.original.status, row.original.date) : "trDefault"}>
+              <tr {...row.getRowProps()} className={!props.defaultStyle ? getStyle(row.original.status, new Date(row.original.date)) : "trDefault"}>
                 {row.cells.map((cell) => {
                   return (
                     <td

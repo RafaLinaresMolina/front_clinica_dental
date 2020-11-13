@@ -17,8 +17,8 @@ function ClientAppointmentList(props) {
       3: "Finalizada",
     };
 
-    const isPastDue = ([1, 2].includes(+status) && new Date(date) < new Date());
-    console.log("translateStatus", isPastDue, date, new Date(date))
+    const isPastDue = ([1, 2].includes(+status) && date < new Date());
+    console.log("translateStatus", isPastDue, date)
     return isPastDue ? <span>
           <del>{values[status]}</del>{" "}
           <b style={{ whiteSpace: "nowrap", backgroundColor: "unset" }}>
@@ -125,7 +125,7 @@ function ClientAppointmentList(props) {
           Header: "Estado",
           accessor: (row, i) => {
             console.log('HEADER STATUS: ', row.date)
-            return translateStatus(row.status, row.date);
+            return translateStatus(row.status, new Date(row.date));
           },
         },
       ],
@@ -180,7 +180,7 @@ function ClientAppointmentList(props) {
           accessor: (row, i) => {
             const isCancelable = ![0, 3].includes(row.status);
             const isPastDue = ([1, 2].includes(row.status) && new Date(row.date) < new Date())
-            console.log("Cancel Header", isCancelable, isPastDue, row.date, new Date(row.date))
+            console.log("Cancel Header", isCancelable, isPastDue, row.date, new Date(row.date), new Date())
             return isCancelable && !isPastDue ? (
               <div className="actionButtons">
                 <div
