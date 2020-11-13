@@ -17,11 +17,12 @@ function GenericReactTable(props) {
       4: "trDefault"
     };  
 
-    const isCancellable = ([1,2].includes(status));
+    console.log("isCancellable", [1,2].includes(+status), "isPastDue", isPastDue(date));
+    const isCancellable = ([1,2].includes(+status));
     if(isCancellable && !isPastDue(date)){
       return "trPastDue"
     }
-    return values[status] ? values[status] : 'trDefault';
+    return values[+status] ? values[+status] : 'trDefault';
   };
 
   const data = React.useMemo(() => props.data, [props.data]);
