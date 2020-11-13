@@ -9,7 +9,7 @@ import { INFO_NOTIFICATION, SET_APPOINTMENTS, UPDATE_APPOINTMENTS } from "../../
 
 
 function ClientAppointmentList(props) {
-  const translateStatus = (row) => {
+  const translateStatus = (status, date) => {
     const values = {
       0: "Cancelada",
       1: "Pendiente",
@@ -17,17 +17,16 @@ function ClientAppointmentList(props) {
       3: "Finalizada",
     };
 
-    const isCancellable = [1, 2].includes(+row?.status);
-    const isPastDue = (row?.date < new Date());
-    
-    console.log("translateStatus", isCancellable, isPastDue, row?.date)
-    return isCancellable && !isPastDue ? <span>
-          <del>{values[row?.status]}</del>{" "}
+    console.log("translateStatus", isPastDue(date), date)
+    return [1, 2].includes(+status) && isPastDue(date) ? <span>
+          <del>{values[status]}</del>{" "}
           <b style={{ whiteSpace: "nowrap", backgroundColor: "unset" }}>
             Fecha vencida
           </b>
-        </span> : values[row?.status];
+        </span> : values[status];
   };
+
+  const isPastDue = (date) => (date < new Date());
   
   const getClientCitas = async (props)=>{
     const options = {
@@ -126,7 +125,8 @@ function ClientAppointmentList(props) {
         {
           Header: "Estado",
           accessor: (row, i) => {
-            return translateStatus(row);
+            console.log('HEADER STATUS: ', row.date)
+            return translateStatus(row.status, new Date(row.date));
           },
         },
       ],
@@ -180,9 +180,9 @@ function ClientAppointmentList(props) {
           Header: "Cancelar",
           accessor: (row, i) => {
             const isCancelable = ![0, 3].includes(row.status);
-            const isPastDue = ([1, 2].includes(row.status) && new Date(row.date) < new Date())
-            console.log("Cancel Header", isCancelable, isPastDue, row.date, new Date(row.date), new Date())
-            return isCancelable && !isPastDue ? (
+            const isPastDate = isPastDue(new Date(row.date));
+            console.log("Cancel Header", isCancelable, isPastDate, row.date, new Date(row.date), new Date())
+            return isCancelable && !isPastDate ? (
               <div className="actionButtons">
                 <div
                   className={"redButton"}
