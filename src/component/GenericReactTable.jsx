@@ -2,22 +2,27 @@ import React from "react";
 import { useTable, useSortBy } from "react-table";
 import "./GenericReactTable.scss";
 
-const getStyle = (status, date) => {
-  const values = {
-    0: "trCancell",
-    1: "trPending",
-    2: "trAccepted",
-    3: "trDone",
-    4: "trDefault"
-  };  
 
-  if(([1,2].includes(status)) && (new Date(date) < new Date())){
-    return "trPastDue"
-  }
-  return values[status] ? values[status] : 'trDefault';
-};
 
 function GenericReactTable(props) {
+
+  const isPastDue = (date) => (date > new Date())
+
+  const getStyle = (status, date) => {
+    const values = {
+      0: "trCancell",
+      1: "trPending",
+      2: "trAccepted",
+      3: "trDone",
+      4: "trDefault"
+    };  
+    const isCancellable = ([1,2].includes(+status));
+    if(isCancellable && !isPastDue(date)){
+      return "trPastDue"
+    }
+    return values[+status] ? values[+status] : 'trDefault';
+  };
+
   const data = React.useMemo(() => props.data, [props.data]);
   const columns = React.useMemo(() => props.columns, []);
 
@@ -57,7 +62,7 @@ function GenericReactTable(props) {
             prepareRow(row);
             return (
               
-              <tr {...row.getRowProps()} className={!props.defaultStyle ? getStyle(row.original.status, row.original.date) : "trDefault"}>
+              <tr {...row.getRowProps()} className={!props.defaultStyle ? getStyle(row.original.status, new Date(row.original.date)) : "trDefault"}>
                 {row.cells.map((cell) => {
                   return (
                     <td
