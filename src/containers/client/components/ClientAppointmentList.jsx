@@ -9,7 +9,7 @@ import { INFO_NOTIFICATION, SET_APPOINTMENTS, UPDATE_APPOINTMENTS } from "../../
 
 
 function ClientAppointmentList(props) {
-  const translateStatus = (status, date) => {
+  const translateStatus = (row) => {
     const values = {
       0: "Cancelada",
       1: "Pendiente",
@@ -17,15 +17,16 @@ function ClientAppointmentList(props) {
       3: "Finalizada",
     };
 
-    const isCancellable = [1, 2].includes(+status);
-    const isPastDue = (date < new Date());
-    console.log("translateStatus", isCancellable, isPastDue, date)
+    const isCancellable = [1, 2].includes(+row?.status);
+    const isPastDue = (row?.date < new Date());
+    
+    console.log("translateStatus", isCancellable, isPastDue, row?.date)
     return isCancellable && !isPastDue ? <span>
-          <del>{values[status]}</del>{" "}
+          <del>{values[row?.status]}</del>{" "}
           <b style={{ whiteSpace: "nowrap", backgroundColor: "unset" }}>
             Fecha vencida
           </b>
-        </span> : values[status];
+        </span> : values[row?.status];
   };
   
   const getClientCitas = async (props)=>{
@@ -125,8 +126,7 @@ function ClientAppointmentList(props) {
         {
           Header: "Estado",
           accessor: (row, i) => {
-            console.log('HEADER STATUS: ', row.date)
-            return translateStatus(row.status, new Date(row.date));
+            return translateStatus(row);
           },
         },
       ],
