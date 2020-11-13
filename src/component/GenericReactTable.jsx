@@ -16,8 +16,6 @@ function GenericReactTable(props) {
       3: "trDone",
       4: "trDefault"
     };  
-
-    console.log("isCancellable", [1,2].includes(+status), "isPastDue", isPastDue(date));
     const isCancellable = ([1,2].includes(+status));
     if(isCancellable && !isPastDue(date)){
       return "trPastDue"
