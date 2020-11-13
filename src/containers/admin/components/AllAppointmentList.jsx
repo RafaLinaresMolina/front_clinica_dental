@@ -4,27 +4,29 @@ import GenericReactTable from "../../../component/GenericReactTable";
 import GenericModal from "../../../component/GenericModal";
 import "./AllAppointmentList.scss";
 
-const translateStatus = (status, date) => {
-  const values = {
-    0: "Cancelada",
-    1: "Pendiente",
-    2: "Aceptada",
-    3: "Finalizada",
-  };
-  if ([1, 2].includes(status) && new Date(date) < new Date()) {
-    return (
-      <span>
-        <del>{values[status]}</del>{" "}
-        <b style={{ whiteSpace: "nowrap", backgroundColor: "unset" }}>
-          Fecha vencida
-        </b>
-      </span>
-    );
-  }
-  return values[status];
-};
+
 
 function AllAppointmentList(props) {
+
+  const translateStatus = (status, date) => {
+    const values = {
+      0: "Cancelada",
+      1: "Pendiente",
+      2: "Aceptada",
+      3: "Finalizada",
+    };
+    if ([1, 2].includes(status) && new Date(date) < new Date()) {
+      return (
+        <span>
+          <del>{values[status]}</del>{" "}
+          <b style={{ whiteSpace: "nowrap", backgroundColor: "unset" }}>
+            Fecha vencida
+          </b>
+        </span>
+      );
+    }
+    return values[status];
+  };
 
   const [showDetail, setShowDetail] = useState(false);
   const [row, setRow] = useState({});

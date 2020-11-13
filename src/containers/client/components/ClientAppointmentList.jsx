@@ -6,70 +6,72 @@ import "./ClientContent.scss";
 import { connect } from "react-redux";
 import { INFO_NOTIFICATION, SET_APPOINTMENTS, UPDATE_APPOINTMENTS } from "../../../redux/types";
 
-const translateStatus = (status, date) => {
-  const values = {
-    0: "Cancelada",
-    1: "Pendiente",
-    2: "Aceptada",
-    3: "Finalizada",
-  };
-  if ([1, 2].includes(status) && new Date(date) < new Date()) {
-    return (
-      <span>
-        <del>{values[status]}</del>{" "}
-        <b style={{ whiteSpace: "nowrap", backgroundColor: "unset" }}>
-          Fecha vencida
-        </b>
-      </span>
-    );
-  }
-  return values[status];
-};
 
-const getClientCitas = async (props)=>{
-  const options = {
-    headers: { Authorization: `Bearer ${props.user.token}` }
-  }
-  try{
-    const citas = await axios.get(process.env.REACT_APP_BASE_URL + "/client/appointments", options);
-    props.dispatch({
-      type: UPDATE_APPOINTMENTS,
-      payload: citas.data
-    });
-  }catch(err){
-    throw err
-  }
-}
-
-const cancelAppointment = async (
-  row,
-  hideModalCancel,
-  props
-) => {
-  try {
-    const options = { headers: { Authorization: `Bearer ${props.user.token}` } };
-    await axios.delete(
-      `${process.env.REACT_APP_BASE_URL}/client/appointment/${row._id}`,
-      options
-    );
-    props.dispatch({
-      type: INFO_NOTIFICATION,
-      payload: {
-        notification: {
-          title: "Cita Cancelada",
-          msg: `La cita ${row.title} ha sido cancelada`,
-        },
-        show: true,
-      },
-    });
-    hideModalCancel();
-    await getClientCitas(props);
-  } catch (err) {
-    console.log(err);
-  }
-};
 
 function ClientAppointmentList(props) {
+  const translateStatus = (status, date) => {
+    const values = {
+      0: "Cancelada",
+      1: "Pendiente",
+      2: "Aceptada",
+      3: "Finalizada",
+    };
+    if ([1, 2].includes(status) && new Date(date) < new Date()) {
+      return (
+        <span>
+          <del>{values[status]}</del>{" "}
+          <b style={{ whiteSpace: "nowrap", backgroundColor: "unset" }}>
+            Fecha vencida
+          </b>
+        </span>
+      );
+    }
+    return values[status];
+  };
+  
+  const getClientCitas = async (props)=>{
+    const options = {
+      headers: { Authorization: `Bearer ${props.user.token}` }
+    }
+    try{
+      const citas = await axios.get(process.env.REACT_APP_BASE_URL + "/client/appointments", options);
+      props.dispatch({
+        type: UPDATE_APPOINTMENTS,
+        payload: citas.data
+      });
+    }catch(err){
+      throw err
+    }
+  }
+  
+  const cancelAppointment = async (
+    row,
+    hideModalCancel,
+    props
+  ) => {
+    try {
+      const options = { headers: { Authorization: `Bearer ${props.user.token}` } };
+      await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/client/appointment/${row._id}`,
+        options
+      );
+      props.dispatch({
+        type: INFO_NOTIFICATION,
+        payload: {
+          notification: {
+            title: "Cita Cancelada",
+            msg: `La cita ${row.title} ha sido cancelada`,
+          },
+          show: true,
+        },
+      });
+      hideModalCancel();
+      await getClientCitas(props);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const [showDetail, setShowDetail] = useState(false);
   const [showCancel, setShowCancel] = useState(false);
 
@@ -177,7 +179,8 @@ function ClientAppointmentList(props) {
         {
           Header: "Cancelar",
           accessor: (row, i) => {
-            return ![0, 3].includes(row.status) ? (
+            return ![0, 3].includes(row.status) && ([1, 2].includes(row.status) && new Date(row.date) > new Date()) ? (
+
               <div className="actionButtons">
                 <div
                   className={"redButton"}
