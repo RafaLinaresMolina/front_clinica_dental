@@ -18,7 +18,7 @@ function ClientAppointmentList(props) {
     };
 
     const isPastDue = ([1, 2].includes(+status) && new Date(date) < new Date());
-    console.log("translateStatus", isPastDue)
+    console.log("translateStatus", isPastDue, date, new Date(date))
     return isPastDue ? <span>
           <del>{values[status]}</del>{" "}
           <b style={{ whiteSpace: "nowrap", backgroundColor: "unset" }}>
@@ -179,7 +179,7 @@ function ClientAppointmentList(props) {
           accessor: (row, i) => {
             const isCancelable = ![0, 3].includes(row.status);
             const isPastDue = ([1, 2].includes(row.status) && new Date(row.date) < new Date())
-            console.log("Cancel Header", isCancelable, isPastDue)
+            console.log("Cancel Header", isCancelable, isPastDue, row.date, new Date(row.date))
             return isCancelable && !isPastDue ? (
               <div className="actionButtons">
                 <div
