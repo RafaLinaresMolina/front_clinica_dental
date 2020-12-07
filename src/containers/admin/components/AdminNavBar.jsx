@@ -35,9 +35,6 @@ function AdminNavBar(props) {
         <div className="turqButton" onClick={() => props.setAction('profile')}>
           Ver perfil
         </div>
-        <div className="turqButton" onClick={() => props.setAction('logged')}>
-          Usuarios activos
-        </div>
         <div className="turqButton" onClick={async() => {
             try {
               await logOut(props);

@@ -68,7 +68,7 @@ function AllAppointmentList(props) {
         },
         {
           Header: "Creación de la cita",
-          accessor: "creationDate",
+          accessor: "created_at",
           Cell: ({ value }) => {
             return value ? (
               <span style={{ whiteSpace: "nowrap" }}>
@@ -102,7 +102,7 @@ function AllAppointmentList(props) {
         {
           Header: "Cliente",
           accessor: (row, i) => {
-            return row.ClientId ? `${row.ClientId.name} ${row.ClientId.lastName}` : ``;
+            return row.clients ? `${row.clients.name} ${row.clients.lastName}` : ``;
           },
           Cell: ({value}) => {
             return value ? (
@@ -120,7 +120,7 @@ function AllAppointmentList(props) {
         {
           Header: "Atendido por",
           accessor: (row, i) => {
-            return row.DentistId ? `${row.DentistId.name} ${row.DentistId.lastName}` : ``;
+            return row.dentists ? `${row.dentists.name} ${row.dentists.lastName}` : ``;
           },
           Cell: ({value}) => {
             return value ? (

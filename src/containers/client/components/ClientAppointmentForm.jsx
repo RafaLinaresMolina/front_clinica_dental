@@ -8,6 +8,7 @@ import {
 } from '@material-ui/pickers';
 
 import DateFnsUtils from '@date-io/date-fns';
+import { connect } from "react-redux";
 
 function ClientAppointmentForm(props) {
 
@@ -126,7 +127,7 @@ function ClientAppointmentForm(props) {
           const response = await validateAndSend(appointment, validators);
             if(response){
               setTimeout(() => {
-                props.setAction('Citas');
+                props.setAction('citas');
               }, 1000);
             }            
         }catch(err){
@@ -138,4 +139,8 @@ function ClientAppointmentForm(props) {
   );
 }
 
-export default ClientAppointmentForm;
+const mapStateToProps = state => {
+  return {user: state.user}
+}
+
+export default connect(mapStateToProps) (ClientAppointmentForm);

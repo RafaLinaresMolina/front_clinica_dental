@@ -22,7 +22,7 @@ const doLogin = async (login) => {
     const token = resLogin.data.token;
     const headers = { headers: { Authorization: `Bearer ${token}` } };
     const resUser = await axios.get(
-      process.env.REACT_APP_BASE_URL + "/auth/user",
+      process.env.REACT_APP_BASE_URL + "/profile",
       headers
     );
 

@@ -9,6 +9,11 @@ import { INFO_NOTIFICATION, SET_APPOINTMENTS, UPDATE_APPOINTMENTS } from "../../
 
 
 function ClientAppointmentList(props) {
+
+useEffect(() => {
+  getClientCitas(props)
+}, [])
+
   const translateStatus = (status, date) => {
     const values = {
       0: "Cancelada",
@@ -48,11 +53,14 @@ function ClientAppointmentList(props) {
     props
   ) => {
     try {
-      const options = { headers: { Authorization: `Bearer ${props.user.token}` } };
+      
+      const options = { headers: {'Content-Type': 'application/json', Authorization: `Bearer ${props.user.token}`} };
+      console.log(options)
       await axios.delete(
-        `${process.env.REACT_APP_BASE_URL}/client/appointment/${row._id}`,
+        `${process.env.REACT_APP_BASE_URL}/client/appointment/${row.id}`,
         options
       );
+      console.log('done')
       props.dispatch({
         type: INFO_NOTIFICATION,
         payload: {
@@ -135,7 +143,7 @@ function ClientAppointmentList(props) {
         {
           Header: "Nombre",
           accessor: (row, i) => {
-            return row.DentistId ? `${row.DentistId.name} ${row.DentistId.lastName}` : ``;
+            return row.dentists ? `${row.dentists.name} ${row.dentists.lastName}` : ``;
           },
           Cell: ({value}) => {
             return value ? (

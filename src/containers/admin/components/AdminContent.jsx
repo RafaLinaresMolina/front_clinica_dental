@@ -2,7 +2,6 @@ import React from "react";
 import Profile from "../../profile/Profile";
 import AllAppointmentList from "./AllAppointmentList";
 import "./AdminContent.scss";
-import AllLoggedUsers from "./AllLoggedUsers";
 
 function AdminContent(props) {
 
@@ -15,7 +14,6 @@ function AdminContent(props) {
       setAppointments={props.setAppointments}
       />,
       'profile': <Profile user={props.user}/>,
-      'logged': <AllLoggedUsers user={props.user} usersLogged={props.usersLogged} setUsersLogged={props.setUsersLogged} />
     }
     return actions[action] ? actions[action] : actions['citas'];
   }

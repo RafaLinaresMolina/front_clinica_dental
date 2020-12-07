@@ -24,7 +24,7 @@ const getClientCitas = async (props)=>{
     headers: { Authorization: `Bearer ${props.user.token}` }
   }
   try{
-    const citas = await axios.get(process.env.REACT_APP_BASE_URL + "/client/appointments", options);
+    const citas = await axios.get(process.env.REACT_APP_BASE_URL + "/client/appointments" ,options);
     return citas.data;
   }catch(err){
     throw err

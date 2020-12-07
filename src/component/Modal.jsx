@@ -19,7 +19,7 @@ function Modal(props)  {
       const options = {
         headers: { Authorization: `Bearer ${props.user.token}` }
       }
-      await axios.delete(process.env.REACT_APP_BASE_URL + '/client/appointment/' + id, options);
+      await axios.put(`${process.env.REACT_APP_BASE_URL}/client/appointment/${id}`, options);
       props.getClientCitas();
       props.handleClose();
     } catch (error) {
@@ -43,7 +43,7 @@ function Modal(props)  {
             </div>
           </div>
           <div className="modal-footer">
-            <div className="turqButton" onClick={async () => await cancelAppointment(props.cita._id)}>Cancelar cita</div>
+            <div className="turqButton" onClick={async () => await cancelAppointment(props.cita.id)}>Cancelar cita</div>
           </div>
         </section>
       </div>
